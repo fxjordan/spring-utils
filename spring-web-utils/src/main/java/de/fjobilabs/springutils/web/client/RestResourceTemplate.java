@@ -20,7 +20,7 @@ import de.fjobilabs.springutils.web.resources.RestResource;
  */
 public class RestResourceTemplate extends ExtendedRestTemplate implements RestResourceOperations {
     
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
     
     @Override
     public RestResource getForResource(String url, Object... uriVariables)
