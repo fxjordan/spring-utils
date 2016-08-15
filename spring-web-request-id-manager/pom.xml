@@ -8,10 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-web-utils</artifactId>
+    <artifactId>spring-web-request-id-manager</artifactId>
     <packaging>jar</packaging>
     
-    <name>Spring Web Utils</name>
+    <name>Spring Web Request-Id Manager</name>
     
     <properties>
         <java.version>1.8</java.version>

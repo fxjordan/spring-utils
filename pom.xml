@@ -20,8 +20,8 @@
     </issueManagement>
 
     <modules>
-
-    <module>spring-web-utils</module>
+        <module>spring-web-utils</module>
+        <module>spring-web-request-id-manager</module>
     </modules>
 
     <build>
