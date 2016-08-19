@@ -1,6 +1,7 @@
 package de.fjobilabs.springutils.web.resources;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 /**
  * @author Felix Jordan
@@ -17,6 +18,7 @@ public class RestResource {
     private String status;
     private Object data;
     
+    @JsonView(RestResourceView.class)
     @JsonProperty("request-id")
     public String getRequestId() {
         return requestId;
@@ -27,6 +29,7 @@ public class RestResource {
         this.requestId = requestId;
     }
     
+    @JsonView(RestResourceView.class)
     public String getStatus() {
         return status;
     }
@@ -35,6 +38,7 @@ public class RestResource {
         this.status = status;
     }
     
+    @JsonView(RestResourceView.class)
     public Object getData() {
         return data;
     }
