@@ -23,6 +23,7 @@
         <module>spring-web-utils</module>
         <module>spring-web-request-id-manager</module>
         <module>spring-web-file-store</module>
+        <module>spring-web-file-store-client</module>
     </modules>
 
     <build>
