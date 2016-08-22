@@ -1,4 +1,4 @@
-package de.fjobilabs.springutils.requestidmanager.service;
+package de.fjobilabs.springutils.web.requestidmanager.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.IdGenerator;
 
-import de.fjobilabs.springutils.requestidmanager.util.PropertyUtils;
+import de.fjobilabs.springutils.web.requestidmanager.util.PropertyUtils;
 
 /**
  * @author Felix Jordan

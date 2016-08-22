@@ -1,4 +1,4 @@
-package de.fjobilabs.springutils.requestidmanager;
+package de.fjobilabs.springutils.web.requestidmanager;
 
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;

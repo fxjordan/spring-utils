@@ -1,4 +1,4 @@
-package de.fjobilabs.springutils.requestidmanager.util;
+package de.fjobilabs.springutils.web.requestidmanager.util;
 
 import java.util.HashMap;
 import java.util.Iterator;

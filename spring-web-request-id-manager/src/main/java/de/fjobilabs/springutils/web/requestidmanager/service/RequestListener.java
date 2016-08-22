@@ -1,4 +1,4 @@
-package de.fjobilabs.springutils.requestidmanager.service;
+package de.fjobilabs.springutils.web.requestidmanager.service;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestEvent;
