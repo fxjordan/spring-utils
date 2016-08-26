@@ -1,5 +1,7 @@
 package de.fjobilabs.springutils.web.resources;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -17,6 +19,7 @@ public class RestResource {
     private String requestId;
     private String status;
     private Object data;
+    private int code;
     
     @JsonView(RestResourceView.class)
     @JsonProperty("request-id")
@@ -45,5 +48,15 @@ public class RestResource {
     
     public void setData(Object data) {
         this.data = data;
+    }
+    
+    @JsonView(RestResourceView.class)
+    @JsonInclude(Include.NON_DEFAULT)
+    public int getCode() {
+        return code;
+    }
+    
+    public void setCode(int code) {
+        this.code = code;
     }
 }
