@@ -15,7 +15,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fjobilabs.springutils.web.client.RestResourceTemplate;
 import de.fjobilabs.springutils.web.filestore.client.domain.FileInfo;
 import de.fjobilabs.springutils.web.filestore.client.exception.FileStoreTemplateException;
+import de.fjobilabs.springutils.web.filestore.client.util.FileStoreExceptionFactory;
 import de.fjobilabs.springutils.web.resources.RestResource;
+import de.fjobilabs.springutils.web.resources.exception.RestResourceExceptionFactory;
 
 /**
  * @author Felix Jordan
@@ -26,12 +28,14 @@ public class FileStoreTemplate implements FileStoreOperations {
     
     private RestResourceTemplate restResourceTemplate = new RestResourceTemplate();
     private ObjectMapper objectMapper = new ObjectMapper();
-    
+    private RestResourceExceptionFactory restResourceExceptionFactory = FileStoreExceptionFactory
+            .getInstance();
+            
     @Override
     public List<FileInfo> getFileInfos(String uri) {
-        RestResource response = this.restResourceTemplate
-                .getForResource(uri);
+        RestResource response = this.restResourceTemplate.getForResource(uri);
         if (!response.getStatus().equals(RestResource.SUCCESS)) {
+            tryThrowRestJobException(response);
             throw new FileStoreTemplateException("Failed to get fiel infos");
         }
         return this.objectMapper.convertValue(response.getData(), this.objectMapper.getTypeFactory()
@@ -40,9 +44,9 @@ public class FileStoreTemplate implements FileStoreOperations {
     
     @Override
     public FileInfo getFileInfo(String uri, String id) {
-        RestResource response = this.restResourceTemplate
-                .getForResource(uri + "/{id}", id);
+        RestResource response = this.restResourceTemplate.getForResource(uri + "/{id}", id);
         if (!response.getStatus().equals(RestResource.SUCCESS)) {
+            tryThrowRestJobException(response);
             throw new FileStoreTemplateException("Failed to get file info for file " + id);
         }
         return this.objectMapper.convertValue(response.getData(), FileInfo.class);
@@ -59,9 +63,9 @@ public class FileStoreTemplate implements FileStoreOperations {
     
     @Override
     public FileInfo createFile(String uri) {
-        RestResource response = this.restResourceTemplate
-                .postForResource(uri, null);
+        RestResource response = this.restResourceTemplate.postForResource(uri, null);
         if (!response.getStatus().equals(RestResource.SUCCESS)) {
+            tryThrowRestJobException(response);
             throw new FileStoreTemplateException("Failed to create new file");
         }
         return this.objectMapper.convertValue(response, FileInfo.class);
@@ -81,6 +85,7 @@ public class FileStoreTemplate implements FileStoreOperations {
             throw new FileStoreTemplateException("Failed to update file content", e);
         }
         if (!response.getStatus().equals(RestResource.SUCCESS)) {
+            tryThrowRestJobException(response);
             throw new FileStoreTemplateException("Failed to update file content");
         }
         return this.objectMapper.convertValue(response.getData(), FileInfo.class);
@@ -106,6 +111,15 @@ public class FileStoreTemplate implements FileStoreOperations {
         return this.objectMapper.readValue(response.getBody(), RestResource.class);
     }
     
+    private void tryThrowRestJobException(RestResource response) {
+        int code = response.getCode();
+        if (code == 0) {
+            return;
+        }
+        throw this.restResourceExceptionFactory.createException(code,
+                response.getData().toString());
+    }
+    
     public RestResourceTemplate getRestResourceTemplate() {
         return restResourceTemplate;
     }
@@ -120,5 +134,14 @@ public class FileStoreTemplate implements FileStoreOperations {
     
     public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
+    }
+    
+    public RestResourceExceptionFactory getRestResourceExceptionFactory() {
+        return restResourceExceptionFactory;
+    }
+    
+    public void setRestResourceExceptionFactory(
+            RestResourceExceptionFactory restResourceExceptionFactory) {
+        this.restResourceExceptionFactory = restResourceExceptionFactory;
     }
 }
