@@ -1,11 +1,15 @@
 package de.fjobilabs.springutils.web.filestore.exception;
 
+import de.fjobilabs.springutils.web.resources.exception.RestResourceException;
+
 /**
  * @author Felix Jordan
  * @since 10.08.2016 - 17:24:35
  * @version 1.0
  */
-public class FileStoreException extends RuntimeException {
+public class FileStoreException extends RestResourceException {
+    
+    public static final int CODE = 1102;
     
     private static final long serialVersionUID = 5918406461735139941L;
     
@@ -23,5 +27,10 @@ public class FileStoreException extends RuntimeException {
     
     public FileStoreException(Throwable cause) {
         super(cause);
+    }
+    
+    @Override
+    public int getCode() {
+        return CODE;
     }
 }
