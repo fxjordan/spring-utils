@@ -95,4 +95,15 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>fjobilabs-snapshots</id>
+			<url>https://repo.fjobilabs.de/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>fjobilabs-releases</id>
+			<url>https://repo.fjobilabs.de/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 </project>
