@@ -1,1 +1,1 @@
-# Spring Utils
+# Spring Utils [![Build Status](https://build.fjobilabs.de/job/spring-utils/job/master/badge/icon)](https://build.fjobilabs.de/blue/organizations/jenkins/spring-utils/)
